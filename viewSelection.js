@@ -5,16 +5,19 @@ src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.
     indexApp.config(['$routeProvider', function($routeProvider){
     $routeProvider
 
-        .when("/BasicJS", {
-            templateUrl: 'BasicJS.html',
+        .when('/BasicJS', {
+            templateUrl: 'BasicJS.htm',
             controller: 'BasicController'})
-        .when("/", {
-            templateUrl: 'IntermediateJS.html',
+        .when("/IntermediateJS", {
+            templateUrl: 'IntermediateJS.htm',
             controller: 'IntermediateController'})
-        .when("/BasicJS", {
-            templateUrl: 'Advanced.html',
+        .when("/AdvancedJS", {
+            templateUrl: 'Advanced.htm',
             controller: 'AdvancedController'})
-        .when("/BasicJS", {
-            templateUrl: 'Profile.html',
+        .when("/ProfileJS", {
+            templateUrl: 'Profile.htm',
             controller: 'ProfileController'})
+        .otherwise({
+            redirectTo: '/BasicJS'
+        });
 }]);
