@@ -1,0 +1,23 @@
+{
+  "name": "APP",
+  "version": "0.0.1",
+  "description": "MyProject",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "engine": "node >=0.6x",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koliver-purdye/SOFT352-WebDevelopment.git"
+  },
+  "author": "APP",
+  "license": "APP",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "/index.html"
+}
