@@ -5,19 +5,20 @@ src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.
     indexApp.config(['$routeProvider', function($routeProvider){
     $routeProvider
 
-        .when('/BasicJS', {
-            templateUrl: 'BasicJS.htm',
+
+        .when('http://localhost:63342/SOFT352-WebDevelopment/index.html?_ijt=rk5o14hp8jfle0rqufp78jsd8u#/BasicJS', {
+            templateUrl: 'BasicSection.html',
             controller: 'BasicController'})
-        .when("/IntermediateJS", {
-            templateUrl: 'IntermediateJS.htm',
+        .when('http://localhost:63342/SOFT352-WebDevelopment/index.html?_ijt=rk5o14hp8jfle0rqufp78jsd8u#/IntermediateJS', {
+            templateUrl: 'IntermediateSection.html',
             controller: 'IntermediateController'})
-        .when("/AdvancedJS", {
-            templateUrl: 'Advanced.htm',
+        .when('http://localhost:63342/SOFT352-WebDevelopment/index.html?_ijt=rk5o14hp8jfle0rqufp78jsd8u#/AdvancedJS', {
+            templateUrl: 'AdvancedSection.html',
             controller: 'AdvancedController'})
-        .when("/ProfileJS", {
-            templateUrl: 'Profile.htm',
+        .when('http://localhost:63342/SOFT352-WebDevelopment/index.html?_ijt=rk5o14hp8jfle0rqufp78jsd8u#/ProfileJS', {
+            templateUrl: 'ProfileSection.html',
             controller: 'ProfileController'})
         .otherwise({
-            redirectTo: '/BasicJS'
+            redirectTo: 'http://localhost:63342/SOFT352-WebDevelopment/index.html?_ijt=rk5o14hp8jfle0rqufp78jsd8u#/BasicJS'
         });
 }]);
