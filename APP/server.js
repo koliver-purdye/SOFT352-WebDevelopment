@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const port = 8080
 var   path = "/"
-var buttonEvents = require('./buttonEvents')
+var buttonEvents = require('./public/javascripts/buttonEvents')
 var route = require('./routeAPP')
 
 function onRequest(req,res){
