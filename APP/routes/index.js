@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb').MongoClient;
@@ -8,14 +9,11 @@ var url = 'mongodb://localhost:27017/Users'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('layouts/layout', { title: 'Express' });
+  res.render('layouts/layout');
 });
 
 /* Get other pages */
-router.get('/index', function(req, res, next) {
-    res.render('index', {header: 'Welcome to the JavaScript Learning Webiste'});
-    console.log('This is the index page');
-});
+
 
 router.post('/AddUser', function(req,res,next) {
     console.log(req.body);
@@ -30,38 +28,33 @@ router.post('/AddUser', function(req,res,next) {
         })
 
     })
-    res.redirect('/index')
 })
 
 router.get('/signIn',function(req,res,next){
     console.log('I arrived here');
-    var result = "";
-    var Password = req.body.Password;
-    var Username = req.body.Username;
-    console.log(req.body);
+    var resultArray = [];
+    var PasswordToQuery = req.query.Password;
+    var UsernameToQuery = req.query.Username;
+    console.log(PasswordToQuery, UsernameToQuery);
     mongo.connect(url, function(err, client){
         var db = client.db('Users')
-        var cursor = db.collection('UserID').find({ Password : Password},{ Username: Username});
-        if (cursor.count() == 0){
-        cursor.forEach(function(doc) {
-            result.push(doc);
-            db.close();
+        var cursor = db.collection('UserID').find({Password: PasswordToQuery},{Username: UsernameToQuery});
+        cursor.forEach(function(doc) {    //For each of the documents in the cursor the value will be put on to the array
+            console.log(doc);
+            resultArray.push(doc);
         }, function () {
-           res.render('index', result);
-        })}
-        else{
-            res.render('index', result);
-
-
-        };
+            db.disconnect;
+            res.json(resultArray[0]);
+        })
+            res.render('Basic')
         });
     });
 
 
 
 
-router.get('/login', function(req,res,next){
-
+router.get('/Index', function(req,res,next){
+    res.render('index',{header: 'Welcome to the sign in page'});
 })
 
 router.get('/Basic', function(req, res, next) {
