@@ -1,0 +1,52 @@
+<h1>{{header}}</h1>
+
+<script src = 'javascripts/userClass.js'></script>
+<script src = 'javascripts/profileButtons.js'></script>
+<section class="section">
+<h3> Create Profile </h3>
+    <div class="insert">
+        <label for ="Username">Username</label>
+        <input type ="text" id="Username" name="Username">
+    </div>
+    <div class="insert">
+        <label for ="Firstname">First Name</label>
+        <input type ="text" id="Firstname" name="Firstname">
+    </div>
+    <div class="insert">
+        <label for ="Lastname">Last Name</label>
+        <input type ="text" id="Lastname" name="Lastname">
+    </div>
+    <div class="insert">
+        <label for ="Password">Password</label>
+        <input type ="password" id="Password" name="Password">
+    </div>
+    <button class="button" id="indexADDBtn" type="button" >Sign up</button>
+</section>
+<section class="section">
+    <h3> Sign In </h3>
+        <div class = "insert">
+            <label for = "UsernameIn"> Username </label>
+            <input type="text" id="UsernameIn" name="UsernameIn">
+        </div>
+
+        <div class = "insert">
+            <label for = "PasswordIn"> Password</label>
+            <input type="password" id="PasswordIn" name="PasswordIn">
+        </div>
+        <button class="button" id="indexGetBtn" type="button" >Sign in</button>
+</section>
+{{# if success }}
+<section>
+    <h2>You are successfully logged in, Please navigate to another page to get started</h2>
+</section>
+{{else}}
+    {{#if errors }}
+<section>
+    <ul>
+        {{# each errors}}
+            <li>{{this.msg}}</li>
+        {{/each}}
+    </ul>
+</section>
+    {{/if}}
+{{/if}}
