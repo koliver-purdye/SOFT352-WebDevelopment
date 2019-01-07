@@ -16,19 +16,32 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/AddUser', function(req,res,next) {
-    console.log(req.body);
-    var userItem = req.body
-    mongo.connect(url, function(err, client){
-        assert.equal(null, err);
-        var db = client.db('Users')
-        db.collection('UserID').insertOne(userItem, function(err, db){
+    /*Check validity */
+    req.check('Password', 'Password is invalid').isLength({min: 4})
+    var errors = req.validationErrors();
+    if (errors)
+    {
+        req.session.errors= errors;
+        req.session.success= false;
+        res.redirect('Index');
+    }
+    /*---------------*/
+    else {
+        console.log(req.body);
+        var userItem = req.body
+        mongo.connect(url, function (err, client) {
             assert.equal(null, err);
-            console.log('Item Inserted');
-            db.disconnect
+            var db = client.db('Users')
+            db.collection('UserID').insertOne(userItem, function (err, db) {
+                assert.equal(null, err);
+                console.log('Item Inserted');
+                db.disconnect
+            })
+            req.session.success= true;
+            res.redirect('Index')
         })
-
+    }
     })
-})
 
 router.get('/signIn',function(req,res,next){
     console.log('I arrived here');
@@ -54,7 +67,8 @@ router.get('/signIn',function(req,res,next){
 
 
 router.get('/Index', function(req,res,next){
-    res.render('index',{header: 'Welcome to the sign in page'});
+    res.render('index',{header: 'Welcome to the sign in page', success: req.session.success, errors: req.session.errors});
+    req.session.errors = null;
 })
 
 router.get('/Basic', function(req, res, next) {
