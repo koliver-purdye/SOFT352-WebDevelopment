@@ -1,4 +1,4 @@
-
+var currentUsername = "";
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb').MongoClient;
@@ -9,26 +9,26 @@ var url = 'mongodb://localhost:27017/Users'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('layouts/layout');
+    res.render('Index');
 });
 
 /* Get other pages */
 
 
 router.post('/AddUser', function(req,res,next) {
-    /*Check validity */
+    /*Check validity -- This section did not work and caused errors
     req.check('Password', 'Password is invalid').isLength({min: 4})
     var errors = req.validationErrors();
     if (errors)
     {
         req.session.errors= errors;
         req.session.success= false;
-        res.redirect('Index');
+        res.render('Index');
+        alert('This is not a valid profile to create');
     }
     /*---------------*/
-    else {
         console.log(req.body);
-        var userItem = req.body
+        var userItem = req.body;
         mongo.connect(url, function (err, client) {
             assert.equal(null, err);
             var db = client.db('Users')
@@ -38,10 +38,29 @@ router.post('/AddUser', function(req,res,next) {
                 db.disconnect
             })
             req.session.success= true;
-            res.redirect('Index')
+            res.render('Index')
         })
-    }
+
     })
+
+router.get('/showProfile',function(req,res,next)
+{
+    var userNameToQuery = req.body
+    var resultArray = [];
+    mongo.connect(url, function(err, client){
+        var db = client.db('Users');
+        var cursor = db.collection('UserID').find({Username: userNameToQuery});
+        cursor.forEach(function(doc){
+            console.log(doc);
+            resultArray.push(doc);
+
+        },function(){
+            db.disconnect;
+            res.json(resultArray[0]);
+        })
+
+    })
+})
 
 router.get('/signIn',function(req,res,next){
     console.log('I arrived here');
@@ -59,7 +78,10 @@ router.get('/signIn',function(req,res,next){
             db.disconnect;
             res.json(resultArray[0]);
         })
-            res.render('Basic')
+        if(resultArray[0] != null){
+            req.session.username = req.query.Username;
+            res.cookie('UserCookie', req.query.Username)
+        }
         });
     });
 
@@ -67,8 +89,9 @@ router.get('/signIn',function(req,res,next){
 
 
 router.get('/Index', function(req,res,next){
-    res.render('index',{header: 'Welcome to the sign in page', success: req.session.success, errors: req.session.errors});
-    req.session.errors = null;
+   res.render('index',{header: 'Welcome to the sign in page'});
+    /* res.render('index',{header: 'Welcome to the sign in page', success: req.session.success, errors: req.session.errors});
+    req.session.errors = null; */
 })
 
 router.get('/Basic', function(req, res, next) {
@@ -78,7 +101,6 @@ router.get('/Basic', function(req, res, next) {
 
 router.get('/BasicQuiz', function(req, res, next) {
     res.render('Basic',{header: 'This is the Basic JavaScript Learning Section'});
-    res.valueOf
     console.log('This was requested from button')
 
 });
@@ -110,8 +132,15 @@ router.get('/ProfileQuiz', function(req, res, next) {
 });
 
 router.get('/Profile', function(req, res, next) {
-    res.render('Profile',{header: 'This is your profile'});
 
+    if(req.query.Username) {
+        res.render('Profile', {header: 'This is your profile', username: req.query.Username});
+        res.cookie('User',req.query.Username);
+    }
+    else
+    {
+        res.render('Profile', {header: 'Please sign in/up to see your profile'});
+    }
 });
 
 
