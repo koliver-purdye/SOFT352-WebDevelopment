@@ -1,4 +1,4 @@
-
+/* THIS WAS THE ORIGINAL ROUTING PATH */
 src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"
 src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"
     var indexApp = angular.module("indexApp", ['ngRoute']);

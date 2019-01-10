@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var hbs = require('express-handlebars');
+//var hbs = require('express-handlebars');
 var expressSession = require('express-session');
 //var expressValidator = require('express-validator');
 var indexRouter = require('./routes/index');
@@ -12,9 +12,9 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 // view engine setup
-app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts'}));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname,'views'));
+app.set('view engine','jade');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,7 +26,7 @@ app.use(expressSession({secret: 'krisSecret', saveUninitialized: false, resave: 
 
 
 app.use('/', indexRouter);
-
+app.use(express.static(__dirname + '/views'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

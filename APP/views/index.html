@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheets/webAppStyle.css">
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="javascripts/quizButton.js")></script>
+    <script src="javascripts/profileButtons.js"></script>
+    <title> SOFT352 - A JavaScript learning web application</title>
+</head>
+
+<body>
+
+<h1>Please Sign in/ Sign up</h1>
+
+<script src = 'javascripts/userClass.js'></script>
+<script src = 'javascripts/profileButtons.js'></script>
+<section class="section">
+    <h3> Create Profile </h3>
+    <div class="insert">
+        <label for ="Username">Username</label>
+        <input type ="text" id="Username" name="Username">
+    </div>
+    <div class="insert">
+        <label for ="Firstname">First Name</label>
+        <input type ="text" id="Firstname" name="Firstname">
+    </div>
+    <div class="insert">
+        <label for ="Lastname">Last Name</label>
+        <input type ="text" id="Lastname" name="Lastname">
+    </div>
+    <div class="insert">
+        <label for ="Password">Password</label>
+        <input type ="password" id="Password" name="Password">
+    </div>
+    <button class="button" id="indexADDBtn" type="button" >Sign up</button>
+</section>
+<section class="section">
+    <h3> Sign In </h3>
+    <div class = "insert">
+        <label for = "UsernameIn"> Username </label>
+        <input type="text" id="UsernameIn" name="UsernameIn">
+    </div>
+
+    <div class = "insert">
+        <label for = "PasswordIn"> Password</label>
+        <input type="password" id="PasswordIn" name="PasswordIn">
+    </div>
+    <button class="button" id="indexGetBtn" type="button" >Sign in</button>
+</section>
+</body>
+
+</html>

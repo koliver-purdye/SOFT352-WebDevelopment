@@ -1,7 +1,7 @@
 src = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js'
 src = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js'
 //This script is used too create all the controllers
-
+/* THIS IS NOT LONGER PART OF THE PROGRAM, ITS PURELY HERE TO SHOW HOW IT STARTED AS AN ANGULAR APPLICATION */
 module.exports
 {
     angular.module('indexApp.controllers', []);

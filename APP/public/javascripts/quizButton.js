@@ -1,8 +1,9 @@
 src = 'userClass.js';
 $(document).ready(function(){
+
     $('#BasicBtn').click(function() {
-        $.get('http://localhost:8080/BasicQuiz', function(result){
-            /* This is where to add the code to add the data to the class */
+        var questionType = "BasicQuestion";
+        $.get('http://localhost:8080/BasicQuiz', questionType ,function(result){
             console.log('I got here aswell')
         })
 

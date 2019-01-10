@@ -26,7 +26,7 @@ var MongoDB = require('mongodb')
 
 
 
-MongoClient.connect('mongodb://localhost:27017',function (err, client)
+MongoClient.connect('mongodb://localhost:27017',function (err, client) //Checks if connection can be made
 {
     if (err) throw (err)
 
